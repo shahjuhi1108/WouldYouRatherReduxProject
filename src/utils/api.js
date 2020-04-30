@@ -15,6 +15,11 @@ export function getInitialData () {
   }))
 }
 
+
+export function getUsers() {
+  return _getUsers()
+}
+
 export function saveQuestionAnswer (info) {
   return _saveQuestionAnswer(info)
 }
