@@ -13,12 +13,12 @@ export function addQuestion (question) {
 export function handleAddQuestion (optionOne, optionTwo) {
     return (dispatch, getState) => {
 
-        const { authedUser } = getState().authedUser
+        //const { authedUser } = getState().authedUser
 
         return saveQuestion({
             optionOneText: optionOne,
             optionTwoText: optionTwo,
-            author: "authedUser",
+            author: "sarahedo",
         })
             .then((question) => dispatch(addQuestion(question)))
     }

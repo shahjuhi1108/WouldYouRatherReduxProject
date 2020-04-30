@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { handleLoginPageData } from '../actions/loginPageData'
 //import LoginPage from './LoginPage'
 import { connect } from 'react-redux'
-import NewQuestion from './NewQuestion'
+//import NewQuestion from './NewQuestion'
+import LeaderBoard from './LeaderBoard'
 
 class App extends Component {
   componentDidMount() {
@@ -12,7 +13,8 @@ class App extends Component {
     return (
       <div className='app'>
         {/*<LoginPage />*/}
-        <NewQuestion />
+        {/*<NewQuestion />*/}
+        <LeaderBoard />
       </div>
     )
   }
