@@ -1,23 +1,40 @@
 import React, { Component } from 'react'
-import { handleLoginPageData } from '../actions/loginPageData'
+import { handleInitialData } from '../actions/loginPageData'
 //import LoginPage from './LoginPage'
 import { connect } from 'react-redux'
 //import NewQuestion from './NewQuestion'
-import LeaderBoard from './LeaderBoard'
+//import LeaderBoard from './LeaderBoard'
+import SelectedQuestion from './SelectedQuestion'
+
+
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleLoginPageData())
+    this.props.dispatch(handleInitialData())
   }
+
   render() {
     return (
       <div className='app'>
         {/*<LoginPage />*/}
         {/*<NewQuestion />*/}
-        <LeaderBoard />
+        {/*<LeaderBoard /> */}
+        {this.props.loading 
+              ? null
+              : 
+                <div>
+                  <SelectedQuestion questionId="6ni6ok3ym7mf1p33lnez"/>
+                </div>
+              }
       </div>
     )
   }
 }
 
-export default connect()(App)
+function mapStateToProps(state) {
+  return { 
+    loading: (Object.keys(state.users).length === 0 || Object.keys(state.questions).length === 0)
+  }
+}
+
+export default connect(mapStateToProps)(App)

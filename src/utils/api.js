@@ -20,6 +20,10 @@ export function getUsers() {
   return _getUsers()
 }
 
+export function getQuestions() {
+  return _getQuestions()
+}
+
 export function saveQuestionAnswer (info) {
   return _saveQuestionAnswer(info)
 }

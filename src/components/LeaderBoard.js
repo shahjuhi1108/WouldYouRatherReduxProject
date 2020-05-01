@@ -7,19 +7,24 @@ class LeaderBoard extends Component {
 
         const { users } = this.props
 
+        const sortedUserIds = Object.keys(users)
+            .sort((a, b) =>
+                (Object.keys(users[b].answers).length + users[b].questions.length)
+                - (Object.keys(users[a].answers).length + users[a].questions.length))
+
         return (
             <div>
                 <h3>LeaderBoard</h3>
-                {Object.keys(users).map((id) => <LeaderTile key={id} user={users[id]}/>)}
+                {sortedUserIds.map((id) => <LeaderTile key={id} user={users[id]} />)}
             </div>
         )
     }
 }
 
-function mapStateToProps ({ users }) {
+function mapStateToProps({ users }) {
     return {
-      users
+        users
     }
-  }
+}
 
 export default connect(mapStateToProps)(LeaderBoard)

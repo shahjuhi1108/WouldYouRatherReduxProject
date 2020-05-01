@@ -1,6 +1,7 @@
-import { saveQuestion } from '../utils/api'
+import { saveQuestion, saveQuestionAnswer } from '../utils/api'
 
 export const ADD_QUESTION = 'ADD_QUESTION'
+export const UPDATE_VOTE = 'UPDATE_VOTE'
 
 
 export function addQuestion (question) {
@@ -22,4 +23,24 @@ export function handleAddQuestion (optionOne, optionTwo) {
         })
             .then((question) => dispatch(addQuestion(question)))
     }
+}
+
+export function updateVote (question) {
+  return {
+    type: UPDATE_VOTE,
+    question
+  }
+}
+
+export function handleUpdateVote (qid, answer) {
+  return (dispatch, getState) => {
+    //const {authedUser} = getState().authedUser
+
+    return saveQuestionAnswer({
+      authedUser: "tylermcginnis",
+      qid: qid,
+      answer: answer
+    })
+      .then((question) => updateVote(question))
+  }
 }
