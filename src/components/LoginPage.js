@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import { connect } from 'react-redux'
-import { setAuthedUser } from '../actions/authedUser'
+import { setAuthedUser } from '../actions/shared'
 
 
 class LoginPage extends Component {

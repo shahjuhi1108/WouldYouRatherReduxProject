@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { handleInitialData } from '../actions/loginPageData'
+import { handleInitialData } from '../actions/shared'
 import LoginPage from './LoginPage'
 import { connect } from 'react-redux'
 import NewQuestion from './NewQuestion'
