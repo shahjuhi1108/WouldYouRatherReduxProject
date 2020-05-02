@@ -6,6 +6,7 @@ import NewQuestion from './NewQuestion'
 import LeaderBoard from './LeaderBoard'
 import SelectedQuestion from './SelectedQuestion'
 import Result from './Result'
+import Home from './Home'
 
 
 
@@ -28,6 +29,7 @@ class App extends Component {
                 </div>
         }
         <Result questionId="6ni6ok3ym7mf1p33lnez"/>
+        <Home />
       </div>
     )
   }

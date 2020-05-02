@@ -32,22 +32,25 @@ export function handleAddQuestion (optionOne, optionTwo) {
     }
 }
 
-export function updateVote (question) {
+export function updateVote (authedUser, qid, answer) {
   return {
     type: UPDATE_VOTE,
-    question
+    authedUser,
+    qid, 
+    answer
   }
 }
 
 export function handleUpdateVote (qid, answer) {
   return (dispatch, getState) => {
-    //const {authedUser} = getState().authedUser
+    const authedUser = "johndoe"
+    //getState().authedUser
 
     return saveQuestionAnswer({
-      authedUser: "tylermcginnis",
+      authedUser: authedUser,
       qid: qid,
       answer: answer
     })
-      .then(() => dispatch(updateVote(qid, answer)))
+      .then(() => dispatch(updateVote(authedUser, qid, answer)))
   }
 }

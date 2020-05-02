@@ -50,8 +50,6 @@ class SelectedQuestion extends Component {
         const { dispatch, questionId } = this.props
 
         dispatch(handleUpdateVote(questionId, chosenValue))
-
-
     }
 
 
