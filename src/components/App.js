@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { handleInitialData } from '../actions/loginPageData'
-//import LoginPage from './LoginPage'
+import LoginPage from './LoginPage'
 import { connect } from 'react-redux'
-//import NewQuestion from './NewQuestion'
-//import LeaderBoard from './LeaderBoard'
+import NewQuestion from './NewQuestion'
+import LeaderBoard from './LeaderBoard'
 import SelectedQuestion from './SelectedQuestion'
+import Result from './Result'
 
 
 
@@ -16,16 +17,17 @@ class App extends Component {
   render() {
     return (
       <div className='app'>
-        {/*<LoginPage />*/}
-        {/*<NewQuestion />*/}
-        {/*<LeaderBoard /> */}
+        <LoginPage />
+        <NewQuestion />
+        <LeaderBoard />
         {this.props.loading 
               ? null
               : 
                 <div>
                   <SelectedQuestion questionId="6ni6ok3ym7mf1p33lnez"/>
                 </div>
-              }
+        }
+        <Result questionId="6ni6ok3ym7mf1p33lnez"/>
       </div>
     )
   }

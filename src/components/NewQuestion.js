@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent'
 import { TextField, Typography } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import Tab from '@material-ui/core/Tab'
-import { handleAddQuestion } from '../actions/addQuestion'
+import { handleAddQuestion } from '../actions/questions'
 
 
 

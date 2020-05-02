@@ -13,7 +13,7 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Radio from '@material-ui/core/Radio'
 import Button from '@material-ui/core/Button'
-import { handleUpdateVote } from '../actions/addQuestion'
+import { handleUpdateVote } from '../actions/questions'
 
 
 
@@ -24,9 +24,7 @@ const styles = {
         maxWidth: 500,
         margin: 8
     },
-    media: {
-        height: 140,
-    },
+
 }
 
 class SelectedQuestion extends Component {
@@ -53,9 +51,6 @@ class SelectedQuestion extends Component {
 
         dispatch(handleUpdateVote(questionId, chosenValue))
 
-        this.setState(() => ({
-            chosenValue: '',
-        }))
 
     }
 
@@ -74,7 +69,7 @@ class SelectedQuestion extends Component {
                 <Grid container spacing={2}>
                     <Grid item xs={4}>
                         <Container>
-                            <Avatar className={classes.large} alt={users[questions[questionId].author].name} src={users[questions[questionId].author].avatarURL} />
+                            <Avatar alt={users[questions[questionId].author].name} src={users[questions[questionId].author].avatarURL} />
                         </Container>
                     </Grid>
                     <Grid item xs={8}>
@@ -95,7 +90,7 @@ class SelectedQuestion extends Component {
                                                 <FormControlLabel value="optionTwo" control={<Radio />} label={questions[questionId].optionTwo.text} />
                                             </RadioGroup>
                                             <Button type="submit" disabled={this.state.chosenValue === ''}
-                                                variant="outlined" color="primary" className={classes.button} onClick={this.handleClick}>
+                                                variant="outlined" color="primary" className={classes.button} onClick={this.handleClick} fullWidth>
                                                 Submit
                                             </Button>
                                         </TableCell>
