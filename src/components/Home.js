@@ -23,7 +23,7 @@ function TabPanel(props) {
         >
             {value === index && (
                 <Box p={2}>
-                    {JSON.stringify(questions)}
+                    {questions.map((question) => <QuestionTile key={question.id} question={question}/>)}
                 </Box>
             )}
         </div>
@@ -50,28 +50,16 @@ class Home extends Component {
         index: 0
     }
 
-    answered = []
-    unanswered = []
-
-
     componentDidMount() {
 
-        const { authedUser, questions } = this.props
-
-        Object.keys(questions).forEach((id) => {
-            questions[id].optionOne.votes.includes(authedUser) || questions[id].optionTwo.votes.includes(authedUser)
-                ? this.answered.push(questions[id])
-                : this.unanswered.push(questions[id])
-        })
-
-      
+        const { authedUser, questions } = this.props      
 
     }
 
     handleChange = (event, newIndex) => {
         event.preventDefault()
 
-        const { index, answered, unanswered } = this.state
+        const { index } = this.state
 
         this.setState(() => ({
             index: newIndex 
@@ -95,8 +83,8 @@ class Home extends Component {
                                 <Tab label="Answered Questions" />
                             </Tabs>
                         </AppBar>
-                        <TabPanel value={this.state.index} index={0} questions={this.unanswered} />
-                        <TabPanel value={this.state.index} index={1} questions={this.answered} />
+                        <TabPanel value={this.state.index} index={0} questions={this.props.unanswered} />
+                        <TabPanel value={this.state.index} index={1} questions={this.props.answered} />
                     </Paper>
                 </div>
             </div>
@@ -105,9 +93,24 @@ class Home extends Component {
 }
 
 function mapStateToProps(state) {
+
+    const answered = []
+    const unanswered = []
+
+    const questions = state.questions
+    const authedUser = "johndoe"
+
+    Object.keys(questions).forEach((id) => {
+        questions[id].optionOne.votes.includes(authedUser) || questions[id].optionTwo.votes.includes(authedUser)
+            ? answered.push(questions[id])
+            : unanswered.push(questions[id])
+    })
+
+
     return {
-        authedUser: "johndoe",
-        questions: state.questions
+        authedUser,
+        answered,
+        unanswered
     }
 }
 

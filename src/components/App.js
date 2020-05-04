@@ -17,23 +17,18 @@ class App extends Component {
   render() {
     return (
       <div className='app'>
-        <LoginPage />
-        <NewQuestion />
-        <LeaderBoard />
-        {this.props.loading 
-              ? null
-              : 
-                <div>
-                  <SelectedQuestion questionId="6ni6ok3ym7mf1p33lnez"/>
-                </div>
-        }
-        <Result questionId="6ni6ok3ym7mf1p33lnez"/>
-        {this.props.loading 
-              ? null
-              : 
-                <div>
-                  <Home />
-                </div>
+        
+        {this.props.loading
+          ? null
+          :
+          <div>
+            <Home />
+            <LoginPage />
+            <NewQuestion />
+            <LeaderBoard />
+            <SelectedQuestion questionId="6ni6ok3ym7mf1p33lnez" />
+            <Result questionId="6ni6ok3ym7mf1p33lnez" />
+          </div>
         }
       </div>
     )
@@ -41,7 +36,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  return { 
+  return {
     loading: (Object.keys(state.users).length === 0 || Object.keys(state.questions).length === 0)
   }
 }
