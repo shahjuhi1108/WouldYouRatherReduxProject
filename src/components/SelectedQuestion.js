@@ -24,7 +24,6 @@ const styles = {
         maxWidth: 500,
         margin: 8
     },
-
 }
 
 class SelectedQuestion extends Component {

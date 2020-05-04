@@ -9,7 +9,6 @@ import Result from './Result'
 import Home from './Home'
 
 
-
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData())
@@ -29,7 +28,13 @@ class App extends Component {
                 </div>
         }
         <Result questionId="6ni6ok3ym7mf1p33lnez"/>
-        <Home />
+        {this.props.loading 
+              ? null
+              : 
+                <div>
+                  <Home />
+                </div>
+        }
       </div>
     )
   }

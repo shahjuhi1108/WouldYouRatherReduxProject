@@ -28,6 +28,10 @@ class LoginPage extends Component {
         
         dispatch(setAuthedUser(selectedUser))
 
+        this.setState(() => ({
+            selectedUser: ''
+        }))
+
     }
 
     render() {
