@@ -7,6 +7,9 @@ import LeaderBoard from './LeaderBoard'
 import SelectedQuestion from './SelectedQuestion'
 import Result from './Result'
 import Home from './Home'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Nav from './Nav'
+
 
 
 class App extends Component {
@@ -16,21 +19,25 @@ class App extends Component {
 
   render() {
     return (
-      <div className='app'>
-        
-        {this.props.loading
-          ? null
-          :
-          <div>
-            <Home />
-            <LoginPage />
-            <NewQuestion />
-            <LeaderBoard />
-            <SelectedQuestion questionId="6ni6ok3ym7mf1p33lnez" />
-            <Result questionId="6ni6ok3ym7mf1p33lnez" />
-          </div>
-        }
-      </div>
+      <Router>
+        <div className='app'>
+          
+          {this.props.loading
+            ? null
+            :
+            <div>
+              <LoginPage />
+              {/*<Nav />
+              <Home />
+              <NewQuestion />
+              <LeaderBoard />
+              <SelectedQuestion />
+              <Result />*/}
+            </div>
+          }
+        </div>
+      </Router>
+
     )
   }
 }

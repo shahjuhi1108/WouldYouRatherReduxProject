@@ -7,6 +7,7 @@ import { TextField, Typography } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import Tab from '@material-ui/core/Tab'
 import { handleAddQuestion } from '../actions/questions'
+import { Redirect } from 'react-router-dom'
 
 
 
@@ -14,10 +15,10 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
     root: {
-      maxWidth: 345,
+        maxWidth: 345,
     },
     media: {
-      height: 140,
+        height: 140,
     },
 }
 
@@ -25,20 +26,21 @@ class NewQuestion extends Component {
 
     state = {
         optionOneText: '',
-        optionTwoText: ''
+        optionTwoText: '',
+        toHome: false
     }
 
     handleChange = (event) => {
 
         const text = event.target.value
 
-        if(event.target.id === "first-option") {
+        if (event.target.id === "first-option") {
             this.setState(() => ({
                 optionOneText: text
             }))
         }
 
-        else if(event.target.id === "second-option") {
+        else if (event.target.id === "second-option") {
             this.setState(() => ({
                 optionTwoText: text
             }))
@@ -54,7 +56,8 @@ class NewQuestion extends Component {
 
         this.setState(() => ({
             optionOneText: '',
-            optionTwoText: ''
+            optionTwoText: '',
+            toHome: true
         }))
 
     }
@@ -62,64 +65,69 @@ class NewQuestion extends Component {
 
     render() {
         const { classes } = this.props
+        const toHome = this.state
+
+        if (toHome === true) {
+            return < Redirect to='/' />
+        }
 
         return (
             <div>
- 
-            <Grid container spacing={3}>
-                <Grid item xs={4}>
-                <Tab label="Active" />
-                </Grid>
 
-                <Grid item xs={4}>
-                <Tab label="Active" />
-                </Grid>
-                <Grid item xs={4}>
-                <Tab label="Active" />
-                </Grid>
-                
-                <Grid item xs={4}>
-                </Grid>
-                <Grid item xs={4}>
-                <Card className={classes.root}>
-                    <CardHeader
-                        title="Create New Question"
-                    >
-                    </CardHeader>
+                <Grid container spacing={3}>
+                    <Grid item xs={4}>
+                        <Tab label="Active" />
+                    </Grid>
 
-                        <CardContent>
-                            <TextField                      
-                                id="first-option" 
-                                label="Option One" variant="filled" 
-                                placeholder="Option One"
-                                value={this.state.optionOneText}
-                                onChange={this.handleChange}
-                            />
-                            <Typography variant="h6" gutterBottom >
-                            OR
+                    <Grid item xs={4}>
+                        <Tab label="Active" />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Tab label="Active" />
+                    </Grid>
+
+                    <Grid item xs={4}>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Card className={classes.root}>
+                            <CardHeader
+                                title="Create New Question"
+                            >
+                            </CardHeader>
+
+                            <CardContent>
+                                <TextField
+                                    id="first-option"
+                                    label="Option One" variant="filled"
+                                    placeholder="Option One"
+                                    value={this.state.optionOneText}
+                                    onChange={this.handleChange}
+                                />
+                                <Typography variant="h6" gutterBottom >
+                                    OR
                             </Typography>
-                            <TextField 
-                                id="second-option" 
-                                label="Option Two" variant="filled" 
-                                placeholder="Option Two"
-                                value={this.state.optionTwoText}
-                                onChange={this.handleChange}                         
-                            />
-                        </CardContent>
+                                <TextField
+                                    id="second-option"
+                                    label="Option Two" variant="filled"
+                                    placeholder="Option Two"
+                                    value={this.state.optionTwoText}
+                                    onChange={this.handleChange}
+                                />
+                            </CardContent>
 
-                        <button
-                        onClick={this.handleClick}
-                        type='submit'
-                        disabled={this.state.optionOneText === '' || this.state.optionTwoText === ''}
-                        >
-                            Submit
+                            <button
+                                onClick={this.handleClick}
+                                type='submit'
+                                disabled={this.state.optionOneText === '' || this.state.optionTwoText === ''}
+                            >
+                                Submit
                         </button>
 
-                </Card>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={4}>
+                    </Grid>
                 </Grid>
-                <Grid item xs={4}>
-                </Grid>
-            </Grid>
             </div>
         )
     }

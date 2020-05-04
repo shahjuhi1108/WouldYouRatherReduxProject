@@ -10,6 +10,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import Table from '@material-ui/core/Table'
 import CardHeader from '@material-ui/core/CardHeader'
 import Button from '@material-ui/core/Button'
+import SelectedQuestion from './SelectedQuestion'
 
 
 
@@ -23,6 +24,15 @@ const styles = {
 
 
 class QuestionTile extends Component {
+
+    handleClick = (event) => {
+        event.preventDefault()
+
+        const { question } = this.props
+
+        
+    }
+
 
     render() {
 
@@ -49,14 +59,21 @@ class QuestionTile extends Component {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>
-                                            Would You Rather...
+                                            Would You Rather
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell>
+                                            ...{question.optionOne.text}...
                                         </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     <TableRow>
                                         <TableCell>
-                                        
+                                            <Button type="submit" variant="outlined" color="primary" className={classes.button} onClick={this.handleClick} fullWidth >
+                                                View Poll
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
@@ -75,7 +92,7 @@ QuestionTile.propTypes = {
 }
 
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
     return {
         users: state.users
     }
