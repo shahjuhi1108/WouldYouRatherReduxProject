@@ -4,6 +4,7 @@ import { getInitialData } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 export const SET_AUTHED_USER = 'SET_AUTHED_USER'
+export const REMOVE_AUTHED_USER = 'REMOVE_AUTHED_USER'
 
 export function setAuthedUser (userId) {
   return {
@@ -11,7 +12,6 @@ export function setAuthedUser (userId) {
     id: userId,
   }
 }
-
 
 export function handleInitialData () {
     return (dispatch) => {
@@ -25,3 +25,8 @@ export function handleInitialData () {
     }
 }
   
+export function removeAuthedUser () {
+  return {
+    type: REMOVE_AUTHED_USER,
+  }
+}

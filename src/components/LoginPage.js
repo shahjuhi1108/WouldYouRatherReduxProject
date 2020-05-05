@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import Container from '@material-ui/core/Container'
+import CardMedia from '@material-ui/core/CardMedia'
+import { Redirect } from 'react-router-dom'
 
 
 
@@ -18,7 +20,17 @@ const styles = {
     },
     formControl: {
         minWidth: 400,
+        padding: 10,
+        margin: 5
     },
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
+    },
+    center: {
+        margin: 5,
+        padding: 10
+    }
 }
 
 
@@ -53,31 +65,30 @@ class LoginPage extends Component {
 
     render() {
 
-        const { users, classes } = this.props
+        const { users, classes, authedUser } = this.props
+
+        if (authedUser !== '') {
+            return < Redirect to='/' />
+        }
 
         return (
             <Container maxWidth="sm">
                 <Card className={classes.root}>
-                <CardHeader
-                    title={<h5>Welcome to the Would You Rather App</h5>
-                    }
-                >
-                </CardHeader>
-                    <Container>
-                        
-                        <h4>Please sign in to continue</h4>
-                        <div>
-                            <h3>Sign in</h3>
-                            <Select
-                                value={this.state.selectedUser}
-                                onChange={this.handleChange}
-                                className={classes.formControl}
-                            >
-                                {users.map((user) => (
-                                    <MenuItem key={user.id} value={user.id}> {user.name} </MenuItem>
-                                ))}
-                            </Select>
-                        </div>
+                    <CardHeader
+                        title="Welcome to the Would You Rather App"
+                        subheader="Please sign in to continue"
+                    />
+                    <CardMedia className={classes.media} image="https://cdn.auth0.com/blog/react-redux/logo.png" title="React-Redux-Logo" />
+                    <Container className={classes.center}>
+                        <Select
+                            value={this.state.selectedUser}
+                            onChange={this.handleChange}
+                            className={classes.formControl}
+                        >
+                            {users.map((user) => (
+                                <MenuItem key={user.id} value={user.id}> {user.name} </MenuItem>
+                            ))}
+                        </Select>
                         <Button
                             onClick={this.handleClick}
                             type='submit'
@@ -95,8 +106,9 @@ class LoginPage extends Component {
     }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ authedUser, users }) {
     return {
+        authedUser: authedUser,
         users: Object.keys(users).map((id) => { return { "id": id, "name": users[id].name } })
     }
 }

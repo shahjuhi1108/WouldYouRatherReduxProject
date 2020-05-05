@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 import { handleInitialData } from '../actions/shared'
 import LoginPage from './LoginPage'
 import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Home from './Home'
 import NewQuestion from './NewQuestion'
 import LeaderBoard from './LeaderBoard'
-import SelectedQuestion from './SelectedQuestion'
-import Result from './Result'
-import Home from './Home'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Nav from './Nav'
 
 
@@ -20,19 +18,18 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className='app'>
-          
+        <div className='container'>
           {this.props.loading
             ? null
             :
             <div>
-              <LoginPage />
-              {/*<Nav />
-              <Home />
-              <NewQuestion />
-              <LeaderBoard />
-              <SelectedQuestion />
-              <Result />*/}
+
+              <Route path='/login' exact component={LoginPage} />
+              <Nav />
+              <Route path='/' exact component={Home} />
+              <Route path='/new' component={NewQuestion} />
+              <Route path='/leader' component={LeaderBoard} />
+
             </div>
           }
         </div>
@@ -44,7 +41,9 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    loading: (Object.keys(state.users).length === 0 || Object.keys(state.questions).length === 0)
+    loading: (Object.keys(state.users).length === 0 || Object.keys(state.questions).length === 0),
+    authedUser: state.authedUser,
+    users: state.users
   }
 }
 

@@ -10,13 +10,13 @@ import TableContainer from '@material-ui/core/TableContainer'
 import Table from '@material-ui/core/Table'
 import CardHeader from '@material-ui/core/CardHeader'
 import Button from '@material-ui/core/Button'
-import SelectedQuestion from './SelectedQuestion'
+//import SelectedQuestion from './SelectedQuestion'
 
 
 
 const styles = {
     root: {
-        maxWidth: 500,
+        maxWidth: 450,
         margin: 8
     },
 }
@@ -28,7 +28,7 @@ class QuestionTile extends Component {
     handleClick = (event) => {
         event.preventDefault()
 
-        const { question } = this.props
+        /*const { question } = this.props*/
 
         
     }

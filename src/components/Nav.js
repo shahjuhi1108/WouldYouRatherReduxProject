@@ -1,9 +1,10 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import { connect } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar'
 import { makeStyles } from '@material-ui/core/styles'
+import { removeAuthedUser } from '../actions/shared'
 
 
 const styles = makeStyles((theme) => ({
@@ -19,15 +20,29 @@ const styles = makeStyles((theme) => ({
     }
 }));
 
+
 function Nav(props) {
 
     const user = props.authedUser
     const classes = styles();
 
+    const handleClick = (event) => {
+        event.preventDefault()
+    
+        props.dispatch(removeAuthedUser())
+    
+    }
+    
+    if (props.authedUser === '') {
+        return <Redirect to='/login' />
+    }
+
+
     return (
+
         <Grid container spacing={3}>
             <Grid item>
-                <NavLink to='/home' exact activeClassName='active'>
+                <NavLink to='/' exact activeClassName='active'>
                     Home
                 </NavLink>
             </Grid>
@@ -53,7 +68,7 @@ function Nav(props) {
             </Grid>
 
             <Grid item>
-                <NavLink to='/' exact activeClassName='active'>
+                <NavLink to='/login' onClick={handleClick} activeClassName='active'>
                     Logout
                 </NavLink>
             </Grid>
