@@ -48,13 +48,13 @@ function Nav(props) {
             </Grid>
 
             <Grid item>
-                <NavLink to='/new' exact activeClassName='active'>
+                <NavLink to='/add' exact activeClassName='active'>
                     New Question
                 </NavLink>
             </Grid>
 
             <Grid item>
-                <NavLink to='/leader' exact activeClassName='active'>
+                <NavLink to='/leaderboard' exact activeClassName='active'>
                     Leader Board
                 </NavLink>
             </Grid>

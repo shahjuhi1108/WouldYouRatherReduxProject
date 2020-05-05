@@ -25,6 +25,19 @@ const styles = {
 
 class SelectedQuestion extends Component {
 
+    componentWillMount () {
+        const url = window.location.pathname;
+        const id = url.substring(url.lastIndexOf('/') + 1)
+
+        var { questionId } = this.props
+
+        if(questionId === undefined) {
+            questionId = id
+        }
+
+    }
+
+
     state = {
         chosenValue: ''
     }
@@ -100,7 +113,7 @@ class SelectedQuestion extends Component {
 }
 
 SelectedQuestion.propTypes = {
-    questionId: PropTypes.string.isRequired,
+    questionId: PropTypes.string,
 }
 
 function mapStateToProps(state) {

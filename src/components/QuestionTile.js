@@ -10,8 +10,8 @@ import TableContainer from '@material-ui/core/TableContainer'
 import Table from '@material-ui/core/Table'
 import CardHeader from '@material-ui/core/CardHeader'
 import Button from '@material-ui/core/Button'
-//import SelectedQuestion from './SelectedQuestion'
-
+import SelectedQuestion from './SelectedQuestion'
+import { Link } from 'react-router-dom';
 
 
 const styles = {
@@ -24,16 +24,7 @@ const styles = {
 
 
 class QuestionTile extends Component {
-
-    handleClick = (event) => {
-        event.preventDefault()
-
-        /*const { question } = this.props*/
-
-        
-    }
-
-
+    
     render() {
 
         const { question, classes, users } = this.props
@@ -71,9 +62,11 @@ class QuestionTile extends Component {
                                 <TableBody>
                                     <TableRow>
                                         <TableCell>
-                                            <Button type="submit" variant="outlined" color="primary" className={classes.button} onClick={this.handleClick} fullWidth >
-                                                View Poll
-                                            </Button>
+                                            <Link to={`/questions/${question.id}`}>
+                                                <Button type="submit" variant="outlined" color="primary" fullWidth >
+                                                    View Poll
+                                                </Button>
+                                            </Link>
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
