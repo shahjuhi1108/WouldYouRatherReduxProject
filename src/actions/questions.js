@@ -21,12 +21,12 @@ export function addQuestion (question) {
 export function handleAddQuestion (optionOne, optionTwo) {
     return (dispatch, getState) => {
 
-        //const { authedUser } = getState().authedUser
+        const { authedUser } = getState()
 
         return saveQuestion({
             optionOneText: optionOne,
             optionTwoText: optionTwo,
-            author: "sarahedo",
+            author: authedUser,
         })
             .then((question) => dispatch(addQuestion(question)))
     }
@@ -43,8 +43,7 @@ export function updateVote (authedUser, qid, answer) {
 
 export function handleUpdateVote (qid, answer) {
   return (dispatch, getState) => {
-    const authedUser = "johndoe"
-    //getState().authedUser
+    const { authedUser } = getState()
 
     return saveQuestionAnswer({
       authedUser: authedUser,

@@ -7,8 +7,7 @@ import Home from './Home'
 import NewQuestion from './NewQuestion'
 import LeaderBoard from './LeaderBoard'
 import Nav from './Nav'
-
-
+import QuestionTile from './QuestionTile'
 
 class App extends Component {
   componentDidMount() {
@@ -29,7 +28,8 @@ class App extends Component {
               <Route path='/' exact component={Home} />
               <Route path='/new' component={NewQuestion} />
               <Route path='/leader' component={LeaderBoard} />
-
+              <Route path='/question/:id' component={QuestionTile} />
+              <Route path='/question' component={SelectedQuestion} />
             </div>
           }
         </div>

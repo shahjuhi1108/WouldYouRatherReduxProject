@@ -16,9 +16,6 @@ import Button from '@material-ui/core/Button'
 import { handleUpdateVote } from '../actions/questions'
 
 
-
-
-
 const styles = {
     root: {
         maxWidth: 500,
