@@ -8,6 +8,7 @@ import Tab from '@material-ui/core/Tab'
 import QuestionTile from './QuestionTile'
 import Box from '@material-ui/core/Box'
 import PropTypes from 'prop-types'
+import { Container } from '@material-ui/core'
 
 
 function TabPanel(props) {
@@ -22,7 +23,7 @@ function TabPanel(props) {
         >
             {value === index && (
                 <Box p={2}>
-                    {questions.map((question) => <QuestionTile key={question.id} question={question}/>)}
+                    {questions.map((question) => <QuestionTile key={question.id} question={question} />)}
                 </Box>
             )}
         </div>
@@ -53,7 +54,7 @@ class Home extends Component {
         event.preventDefault()
 
         this.setState(() => ({
-            index: newIndex 
+            index: newIndex
         }))
 
     }
@@ -64,8 +65,7 @@ class Home extends Component {
         const { classes } = this.props
 
         return (
-            <div>
-                <h1>Home Page</h1>
+            <Container>
                 <div>
                     <Paper className={classes.root} elevation={1} variant="outlined">
                         <AppBar position="static">
@@ -78,7 +78,7 @@ class Home extends Component {
                         <TabPanel value={this.state.index} index={1} questions={this.props.answered} />
                     </Paper>
                 </div>
-            </div>
+            </Container>
         )
     }
 }
@@ -89,7 +89,7 @@ function mapStateToProps(state) {
     const unanswered = []
 
     const questions = state.questions
-    const authedUser = "johndoe"
+    const authedUser = state.authedUser
 
     Object.keys(questions).forEach((id) => {
         questions[id].optionOne.votes.includes(authedUser) || questions[id].optionTwo.votes.includes(authedUser)

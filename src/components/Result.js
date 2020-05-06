@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { lighten, withStyles } from '@material-ui/core/styles'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar'
 import TableHead from '@material-ui/core/TableHead'
@@ -10,19 +9,28 @@ import Table from '@material-ui/core/Table'
 import CardHeader from '@material-ui/core/CardHeader'
 import Paper from '@material-ui/core/Paper'
 import { Card, Grid, TableCell, TableBody, Container, Typography } from '@material-ui/core'
-import LinearProgress from '@material-ui/core/LinearProgress';
-
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 
 const styles = {
     root: {
-        maxWidth: 500,
+        maxWidth: 450,
         margin: 8,
     },
 
     paper: {
+        maxWidth: 400,
+        minWidth: 200,
         margin: 8,
         padding: 10
+    },
+
+    selectedPaper: {
+        maxWidth: 400,
+        minWidth: 200,
+        margin: 8,
+        padding: 10,
+        backgroundColor: lighten('#b2dfdb', 0.7),
     }
 
 }
@@ -30,7 +38,8 @@ const styles = {
 const BorderLinearProgress = withStyles({
     root: {
         height: 25,
-        backgroundColor: lighten('#b2dfdb', 0.5),
+        backgroundColor: lighten('#b2dfdb', 0.3),
+        margin: 5
     },
     bar: {
         borderRadius: 0,
@@ -43,85 +52,113 @@ const BorderLinearProgress = withStyles({
 class Result extends Component {
     render() {
 
-        const { classes } = this.props
+        const { question_id, users, questions, classes, selectedOption } = this.props
+
+
+        const one = questions[question_id].optionOne.votes.length
+        const two = questions[question_id].optionTwo.votes.length
+
+        const total = one + two
 
         return (
 
             <Card className={classes.root}>
-                <CardHeader
-                    title={"Asked by : author"}
-                >
-                </CardHeader>
-                <Grid container spacing={2}>
-                    <Grid item xs={4}>
-                        <Container>
-                            <Avatar />
-                        </Container>
+                <Container>
+                    <CardHeader
+                        title={"Asked by : " + users[questions[question_id].author].name}
+                    >
+                    </CardHeader>
+                    <Grid container spacing={2}>
+                        <Grid item xs={2}>
+                            <Container>
+                                <Avatar alt={users[questions[question_id].author].name} src={users[questions[question_id].author].avatarURL} />
+                            </Container>
+                        </Grid>
+                        <Grid item xs={10}>
+                            <TableContainer>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>
+                                                Results:
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell>
+                                                <Container>
+                                                    <Paper variant="outlined" className={selectedOption === 'optionOne'
+                                                        ? classes.selectedPaper
+                                                        : classes.paper} >
+                                                        <Typography variant="caption"  >
+                                                            Would You Rather {questions[question_id].optionOne.text}
+                                                        </Typography>
+
+                                                        <BorderLinearProgress
+                                                            className={classes.margin}
+                                                            variant="determinate"
+                                                            color="secondary"
+                                                            value={(one / total) * 100}
+                                                        />
+
+                                                        <Typography align='center' variant="caption" display="block">
+                                                            {one} out of {total} votes
+                                                        </Typography>
+
+                                                        <Typography align='center' variant="caption" display="block">
+                                                            {`${((one / total) * 100).toFixed(1)}%`}
+                                                        </Typography>
+
+                                                    </Paper>
+                                                </Container>
+                                                <Container>
+                                                    <Paper variant="outlined" className={selectedOption === 'optionTwo'
+                                                        ? classes.selectedPaper
+                                                        : classes.paper}>
+                                                        <Typography variant="caption" >
+                                                            Would You Rather {questions[question_id].optionTwo.text}
+                                                        </Typography>
+
+                                                        <BorderLinearProgress
+                                                            className={classes.margin}
+                                                            variant="determinate"
+                                                            color="secondary"
+                                                            value={(two / total) * 100}
+                                                        />
+
+                                                        <Typography align="center" variant="caption" display="block">
+                                                            {two} out of {total} votes
+                                                        </Typography>
+
+                                                        <Typography align='center' variant="caption" display="block">
+                                                            {`${((two / total) * 100).toFixed(1)}%`}
+                                                        </Typography>
+
+                                                    </Paper>
+                                                </Container>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={8}>
-                        <TableContainer>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>
-                                            Results:
-                                        </TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell>
-                                            <Container >
-                                                <Paper variant="outlined" className={classes.paper}>
-                                                    <Typography variant="caption" >
-                                                        Would You Rather optionOne - Highlight chosen one
-
-                                                    </Typography>
-
-                                                    <BorderLinearProgress
-                                                        className={classes.margin}
-                                                        variant="determinate"
-                                                        color="secondary"
-                                                        value={50}
-                                                    />
-                                                </Paper>
-
-                                            </Container>
-                                            <Container>
-                                                <Paper variant="outlined" className={classes.paper}>
-                                                    <Typography variant="caption" >
-                                                        Would You Rather optionOne - Highlight chosen one
-
-                                                    </Typography>
-                                                    <BorderLinearProgress
-                                                        className={classes.margin}
-                                                        variant="determinate"
-                                                        color="secondary"
-                                                        value={50}
-                                                    />
-                                                </Paper>
-
-                                            </Container>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Grid>
-                </Grid>
+                </Container>
             </Card>
         )
     }
 }
 
-Result.propTypes = {
-    questionId: PropTypes.string.isRequired,
-}
+function mapStateToProps({ users, questions }, props) {
 
-function mapStateToProps(state) {
+    const { question_id, selectedOption } = props.match.params
+
     return {
-        users: state.users,
-        questions: state.questions
+        question_id,
+        selectedOption,
+        users: users,
+        questions: questions
     }
 }
 

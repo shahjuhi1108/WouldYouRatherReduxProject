@@ -26,6 +26,10 @@ const styles = {
     center: {
         margin: 5,
         padding: 10
+    },
+    textBox: {
+        maxWidth: 400,
+        minWidth: 250
     }
 }
 
@@ -72,15 +76,14 @@ class NewQuestion extends Component {
 
     render() {
         const { classes } = this.props
-        const toHome = this.state
 
-        if (toHome === true) {
+        if (this.state.toHome) {
             return < Redirect to='/' />
         }
 
         return (
             <Container>
-                <div>
+                <div className={classes.root}>
                     <Grid container spacing={3}>
                         <Grid item xs={4}>
                         </Grid>
@@ -91,6 +94,9 @@ class NewQuestion extends Component {
                                 >
                                 </CardHeader>
                                 <Container className={classes.center}>
+                                    <Typography>
+                                        Would You Rather...
+                                    </Typography>
                                     <CardContent>
                                         <TextField
                                             id="first-option"
@@ -98,16 +104,18 @@ class NewQuestion extends Component {
                                             placeholder="Option One"
                                             value={this.state.optionOneText}
                                             onChange={this.handleChange}
+                                            className={classes.textBox}
                                         />
-                                        <Typography variant="h6" gutterBottom >
+                                        <Typography gutterBottom >
                                             OR
-                                    </Typography>
+                                        </Typography>
                                         <TextField
                                             id="second-option"
                                             label="Option Two" variant="filled"
                                             placeholder="Option Two"
                                             value={this.state.optionTwoText}
                                             onChange={this.handleChange}
+                                            className={classes.textBox}
                                         />
                                     </CardContent>
 

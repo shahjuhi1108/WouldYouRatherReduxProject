@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Card, Grid, TableCell, TableBody, Container } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
@@ -14,6 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Radio from '@material-ui/core/Radio'
 import Button from '@material-ui/core/Button'
 import { handleUpdateVote } from '../actions/questions'
+import { Redirect } from 'react-router-dom'
 
 
 const styles = {
@@ -25,21 +25,9 @@ const styles = {
 
 class SelectedQuestion extends Component {
 
-    componentWillMount () {
-        const url = window.location.pathname;
-        const id = url.substring(url.lastIndexOf('/') + 1)
-
-        var { questionId } = this.props
-
-        if(questionId === undefined) {
-            questionId = id
-        }
-
-    }
-
-
     state = {
-        chosenValue: ''
+        chosenValue: '',
+        redirect: false
     }
 
     handleChange = (event) => {
@@ -56,27 +44,37 @@ class SelectedQuestion extends Component {
 
         const { chosenValue } = this.state
 
-        const { dispatch, questionId } = this.props
+        const { dispatch, question_id } = this.props
 
-        dispatch(handleUpdateVote(questionId, chosenValue))
+        dispatch(handleUpdateVote(question_id, chosenValue))
+
+        this.setState(() => ({
+            redirect: true,
+        }))
+
     }
 
 
     render() {
 
-        const { questionId, users, questions, classes } = this.props
+        const { question_id, users, questions, classes } = this.props
+
+        if(this.state.redirect) {
+            return <Redirect to={`/questions/${question_id}/${this.state.chosenValue}`} />
+        }
+
 
         return (
 
             <Card className={classes.root}>
                 <CardHeader
-                    title={users[questions[questionId].author].name + " asks:"}
+                    title={users[questions[question_id].author].name + " asks:"}
                 >
                 </CardHeader>
                 <Grid container spacing={2}>
                     <Grid item xs={4}>
                         <Container>
-                            <Avatar alt={users[questions[questionId].author].name} src={users[questions[questionId].author].avatarURL} />
+                            <Avatar alt={users[questions[question_id].author].name} src={users[questions[question_id].author].avatarURL} />
                         </Container>
                     </Grid>
                     <Grid item xs={8}>
@@ -93,13 +91,13 @@ class SelectedQuestion extends Component {
                                     <TableRow>
                                         <TableCell>
                                             <RadioGroup aria-label="quiz" name="quiz" onChange={this.handleChange}>
-                                                <FormControlLabel value="optionOne" control={<Radio />} label={questions[questionId].optionOne.text} />
-                                                <FormControlLabel value="optionTwo" control={<Radio />} label={questions[questionId].optionTwo.text} />
+                                                <FormControlLabel value="optionOne" control={<Radio />} label={questions[question_id].optionOne.text} />
+                                                <FormControlLabel value="optionTwo" control={<Radio />} label={questions[question_id].optionTwo.text} />
                                             </RadioGroup>
-                                            <Button type="submit" disabled={this.state.chosenValue === ''}
-                                                variant="outlined" color="primary" className={classes.button} onClick={this.handleClick} fullWidth>
-                                                Submit
-                                            </Button>
+                                                <Button onClick={this.handleClick} type="submit" disabled={this.state.chosenValue === ''}
+                                                    variant="outlined" color="primary" className={classes.button} fullWidth>
+                                                    Submit
+                                                </Button>
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
@@ -112,14 +110,14 @@ class SelectedQuestion extends Component {
     }
 }
 
-SelectedQuestion.propTypes = {
-    questionId: PropTypes.string,
-}
+function mapStateToProps({ users, questions }, props) {
 
-function mapStateToProps(state) {
+    const { question_id } = props.match.params
+
     return {
-        users: state.users,
-        questions: state.questions
+        question_id,
+        users: users,
+        questions: questions
     }
 }
 
