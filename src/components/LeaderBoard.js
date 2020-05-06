@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import LeaderTile from './LeaderTile'
+import { Container } from '@material-ui/core'
 
 class LeaderBoard extends Component {
     render() {
@@ -13,10 +14,12 @@ class LeaderBoard extends Component {
                 - (Object.keys(users[a].answers).length + users[a].questions.length))
 
         return (
-            <div>
-                <h3>LeaderBoard</h3>
-                {sortedUserIds.map((id) => <LeaderTile key={id} user={users[id]} />)}
-            </div>
+            <Container>
+                <div>
+                    <h3>LeaderBoard</h3>
+                    {sortedUserIds.map((id) => <LeaderTile key={id} user={users[id]} />)}
+                </div>
+            </Container>
         )
     }
 }

@@ -97,10 +97,9 @@ function mapStateToProps(state) {
             : unanswered.push(questions[id])
     })
 
-
     return {
-        answered,
-        unanswered
+        answered : answered.sort((a,b) => b.timestamp - a.timestamp),
+        unanswered : unanswered.sort((a,b) => b.timestamp - a.timestamp)
     }
 }
 

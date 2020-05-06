@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { handleInitialData } from '../actions/shared'
 import LoginPage from './LoginPage'
 import { connect } from 'react-redux'
@@ -9,6 +9,10 @@ import LeaderBoard from './LeaderBoard'
 import Nav from './Nav'
 import SelectedQuestion from './SelectedQuestion'
 import Result from './Result'
+import { LoadingBar } from 'react-redux-loading'
+import { Container } from '@material-ui/core'
+import { Redirect } from 'react-router-dom'
+
 
 class App extends Component {
   componentDidMount() {
@@ -16,24 +20,37 @@ class App extends Component {
   }
 
   render() {
+
     return (
       <Router>
-        <div className='container'>
-          {this.props.loading
-            ? null
-            :
+        <Fragment>
+          <LoadingBar />
+          <Container className='container'>
             <div>
+              {this.props.loading
+                ? null
+                :
+                <div>
 
-              <Route path='/login' exact component={LoginPage} />
-              <Nav />
-              <Route path='/' exact component={Home} />
-              <Route path='/add' exact component={NewQuestion} />
-              <Route path='/leaderboard' exact component={LeaderBoard} />
-              <Route path='/questions/:question_id' exact component={SelectedQuestion} />
-              <Route path='/questions/:question_id/:selectedOption' exact component={Result} />
+                  {this.props.authedUser === ''
+                  ? <Redirect to='/login' />
+                  : 
+                  <div>
+                  <Nav />
+                  <Route path='/' exact component={Home} />
+                  <Route path='/add' exact component={NewQuestion} />
+                  <Route path='/leaderboard' exact component={LeaderBoard} />
+                  <Route path='/questions/:question_id' exact component={SelectedQuestion} />
+                  <Route path='/questions/:question_id/:selectedOption' exact component={Result} />
+                  </div>
+                  }
+
+                  <Route path='/login' component={LoginPage} />
+                </div>
+              }
             </div>
-          }
-        </div>
+          </Container>
+        </Fragment>
       </Router>
 
     )
@@ -49,3 +66,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(App)
+
+
