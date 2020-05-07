@@ -67,8 +67,10 @@ class LoginPage extends Component {
 
         const { users, classes, authedUser } = this.props
 
+        const from = this.props.location.state.from
+
         if (authedUser !== '') {
-            return < Redirect to='/' />
+            return <Redirect to={ from === '/login' ? '/' : from} />
         }
 
         return (
@@ -106,7 +108,8 @@ class LoginPage extends Component {
     }
 }
 
-function mapStateToProps({ authedUser, users }) {
+function mapStateToProps({ authedUser, users }, props) {
+
     return {
         authedUser: authedUser,
         users: Object.keys(users).map((id) => { return { "id": id, "name": users[id].name } })

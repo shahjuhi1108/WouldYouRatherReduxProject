@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Redirect } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import { connect } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar'
@@ -32,11 +32,6 @@ function Nav(props) {
         props.dispatch(removeAuthedUser())
     
     }
-    
-    if (props.authedUser === '') {
-        return <Redirect to='/login' />
-    }
-
 
     return (
 

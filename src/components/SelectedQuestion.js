@@ -59,6 +59,10 @@ class SelectedQuestion extends Component {
 
         const { question_id, users, questions, classes } = this.props
 
+        if(!questions[question_id]) {
+            return <Redirect to='/404' />
+        }
+
         if(this.state.redirect) {
             return <Redirect to={`/questions/${question_id}/${this.state.chosenValue}`} />
         }

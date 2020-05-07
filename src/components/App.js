@@ -12,6 +12,7 @@ import Result from './Result'
 import { LoadingBar } from 'react-redux-loading'
 import { Container } from '@material-ui/core'
 import { Redirect } from 'react-router-dom'
+import NotFoundPage from './NotFoundPage'
 
 
 class App extends Component {
@@ -20,7 +21,6 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <Router>
         <Fragment>
@@ -31,9 +31,11 @@ class App extends Component {
                 ? null
                 :
                 <div>
-
                   {this.props.authedUser === ''
-                  ? <Redirect to='/login' />
+                  ? <Redirect to={{
+                    pathname: '/login',
+                    state: { from: window.location.pathname }
+                  }} />
                   : 
                   <div>
                   <Nav />
@@ -42,6 +44,7 @@ class App extends Component {
                   <Route path='/leaderboard' exact component={LeaderBoard} />
                   <Route path='/questions/:question_id' exact component={SelectedQuestion} />
                   <Route path='/questions/:question_id/:selectedOption' exact component={Result} />
+                  <Route path="/404" component={NotFoundPage} />
                   </div>
                   }
 
