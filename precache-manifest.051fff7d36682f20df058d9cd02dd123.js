@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "69acdb53bc46e105fe3af89fe3999037",
+    "revision": "17635a73f9095fbb72153b382c56db16",
     "url": "/WouldYouRatherReduxProject/index.html"
   },
   {
-    "revision": "0557389839f6b8c538ef",
+    "revision": "9d9672e356e350444255",
     "url": "/WouldYouRatherReduxProject/static/css/main.b3fb1ed9.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/WouldYouRatherReduxProject/static/js/2.6410e1f1.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "0557389839f6b8c538ef",
-    "url": "/WouldYouRatherReduxProject/static/js/main.547bac5a.chunk.js"
+    "revision": "9d9672e356e350444255",
+    "url": "/WouldYouRatherReduxProject/static/js/main.c0e46656.chunk.js"
   },
   {
     "revision": "ef81d76e6ada975cf3c9",
