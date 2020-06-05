@@ -22,7 +22,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <Router basename="/WouldYouRatherReduxProject/">
         <Fragment>
           <LoadingBar />
           <Container className='container'>
