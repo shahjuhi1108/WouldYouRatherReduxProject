@@ -1,4 +1,19 @@
+# Would You Rather Project
+
+React application built using Redux state management.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+*Live Demo : https://shahjuhi1108.github.io/WouldYouRatherReduxProject/*
+
+## Description
+
+This application is a game in which player can answer questions by choosing the option (either this or that) and he/she can also add questions by providing two options to let others choose and answer. For each question added and for each question answered, player gets one point. The player can collect as many points as possible and secure the first position on the leaderboard.
+
+
+## Technology
+
+The application was developed using React, Redux, JavaScript, VSCode. This application was tested on the web.
 
 ## Available Scripts
 
@@ -36,33 +51,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
